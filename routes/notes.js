@@ -1,12 +1,15 @@
 var express = require('express');
 var router = express.Router();
-
-
+const cors = require('cors'); // corsミドルウェアを追加
+require('dotenv').config();
 
 // Set connection to MongoDB
 const { MongoClient } = require('mongodb');
-const uri = "";
+const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
+
+// Use cors middleware
+router.use(cors());
 
 router.get('/', async (req, res) => {
 // Set database and collection
